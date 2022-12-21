@@ -8,12 +8,12 @@ public class Ladder extends BoardEntity{
 
 	@Override
 	public String getEncounterMessage() {
-		return "Yeyyy!! You have a stair to climb :) ";
+		return "Yeyyy!! You have a ladder to climb :) ";
 	}
 
 	@Override
 	public String getString() {
-		return "L  ";
+		return "🪜️  ";
 	}
 	
 

@@ -15,7 +15,7 @@ public class Snake extends BoardEntity{
 
 	@Override
 	public String getString() {	
-		return "S  ";
+		return "🐍️  ";
 	}
 
 

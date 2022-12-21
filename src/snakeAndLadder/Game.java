@@ -6,22 +6,20 @@ import java.util.Scanner;
 
 import snakeAndLadder.entities.Board;
 import snakeAndLadder.entities.Player;
-import snakeAndLadder.services.DiceService;
+import snakeAndLadder.word_find.WordFind;
 
 public class Game {
 
 	Board board;
 	Queue<Player> players;
 	Queue<Player> winners;
-	int diceCount;
-	int dimention;
-	int size;
+	int size = 100;
+	WordFind wordFinder;
 	
-	public Game(int dimention, int diceCount) {
-		this.size = dimention*dimention;
-		this.dimention = dimention;
-		this.diceCount = diceCount;
-		board = new Board(dimention);
+	public Game() {
+		this.wordFinder = new WordFind();
+
+		board = new Board(10);
 		players = new LinkedList<Player>();
 		winners = new LinkedList<Player>();
 		
@@ -29,16 +27,22 @@ public class Game {
 	
 	public void launch() {
 		this.board.print(players);
+		Scanner in = new Scanner(System.in);
+		
 		while (players.size() > 1) {
 			
 			Player currPlayer = players.poll();
 			System.out.println();
 			System.out.println(currPlayer.getUserName()+"'s turn.");
-			System.out.println("Press 'r' to roll the dice.");
+			
+			wordFinder.printWordGrid();
+			
+			System.out.println("Find a word");
+			String word = in.nextLine();
 
-			Scanner sc = new Scanner(System.in);
-			char c = sc.next().charAt(0);
-			makeMove(currPlayer);
+			int move = wordFinder.patternSearch(word);
+			
+			makeMove(currPlayer, move);
 			if (currPlayer.getPosition() == size) {
 				System.out.println(currPlayer.getUserName() + " won!!!");
 				winners.add(currPlayer);
@@ -48,6 +52,8 @@ public class Game {
 			printPositions();
 			board.print(players);
 		}
+		
+		in.close();
 	}
 
 	private void printPositions() {
@@ -57,11 +63,14 @@ public class Game {
 		
 	}
 
-	private void makeMove(Player player) {
+	private void makeMove(Player player, int move) {
 		int currPosition = player.getPosition();
-		int move = DiceService.roll(this.diceCount);
-		//if move is 6 then you get another chance
-		//What to do in case of multiple dices?
+		
+		if (move == 0) {
+			System.out.println("Word Not Found!");
+			return;
+		}
+		
 		System.out.println("You got: "+move);
 		int finalPos = currPosition + move ;
 		if(finalPos <= size) {
@@ -70,9 +79,8 @@ public class Game {
 				finalPos = board.getEntity(finalPos).getEnd();
 			}
 			System.out.println("Taking you to "+finalPos);
-		}else {
-			System.out.println("Try again in the next turn.");
-			finalPos = currPosition;
+		} else {
+			finalPos = this.size;
 		}
 		
 		player.setPosition(finalPos);
@@ -93,14 +101,6 @@ public class Game {
 
 	public void setWinners(Queue<Player> winners) {
 		this.winners = winners;
-	}
-
-	public int getDiceCount() {
-		return diceCount;
-	}
-
-	public void setDiceCount(int diceCount) {
-		this.diceCount = diceCount;
 	}
 
 	public int getSize() {

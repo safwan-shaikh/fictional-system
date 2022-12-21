@@ -1,7 +1,6 @@
 package snakeAndLadder.entities;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public class Board {
@@ -34,7 +33,7 @@ public class Board {
 	}
 	
 	public void print(Queue<Player> p) {
-		for(int i=cellCount-1; i>0; i--) {
+		for(int i=cellCount; i>0; i--) {
 			for(Player player : p) {
 				//System.out.println(player.getUserName()+":"+player.getPosition());
 				if(i==player.getPosition()) {
@@ -45,11 +44,18 @@ public class Board {
 			if(hasSnakeOrLadder(i)) {
 				System.out.print(cells.get(i).getString());
 			}
-			else
+			else {
+				if (i==1)
+					System.out.print("🏠️");
+				else if (i == 100)
+					System.out.print("🏁️");
+				else
 				System.out.print(i+" ");
-			System.out.print("         ");
-			if(i%10 == 0) {
-				System.out.println();
+			}
+			System.out.print("\t");
+			
+			if(i%10 == 1) {
+				System.out.println("\n");
 			}
 		}
 		System.out.println();
