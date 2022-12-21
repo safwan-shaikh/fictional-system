@@ -13,7 +13,7 @@ public class Ladder extends BoardEntity{
 
 	@Override
 	public String getString() {
-		return "L("+this.getEnd()+")  ";
+		return "L  ";
 	}
 	
 

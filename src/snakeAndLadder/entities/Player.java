@@ -1,7 +1,7 @@
 package snakeAndLadder.entities;
 
-public class Player {
-	int position;
+public class Player extends BoardEntity {
+	Integer position;
 	String userName;
 	
 	
@@ -14,6 +14,7 @@ public class Player {
 	}
 
 	public Player(String userName) {
+		
 		position = 0;
 		this.userName = userName; 
 	}
@@ -24,6 +25,18 @@ public class Player {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	@Override
+	public String getEncounterMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return userName;
 	}
 
 }

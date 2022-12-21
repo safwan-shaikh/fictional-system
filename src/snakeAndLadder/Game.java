@@ -25,11 +25,10 @@ public class Game {
 		players = new LinkedList<Player>();
 		winners = new LinkedList<Player>();
 		
-
 	}
 	
 	public void launch() {
-		this.board.print();
+		this.board.print(players);
 		while (players.size() > 1) {
 			
 			Player currPlayer = players.poll();
@@ -47,6 +46,7 @@ public class Game {
 				players.add(currPlayer);
 			}
 			printPositions();
+			board.print(players);
 		}
 	}
 
