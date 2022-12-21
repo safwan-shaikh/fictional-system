@@ -46,9 +46,9 @@ public class Board {
 			}
 			else {
 				if (i==1)
-					System.out.print("🏠️");
+					System.out.print("HOME");
 				else if (i == 100)
-					System.out.print("🏁️");
+					System.out.print("START");
 				else
 				System.out.print(i+" ");
 			}
