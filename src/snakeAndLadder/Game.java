@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 import snakeAndLadder.entities.Board;
+import snakeAndLadder.entities.BoardEntity;
 import snakeAndLadder.entities.Player;
 import snakeAndLadder.word_find.WordFind;
 
@@ -74,9 +75,14 @@ public class Game {
 		System.out.println("You got: "+move);
 		int finalPos = currPosition + move ;
 		if(finalPos <= size) {
-			if(board.hasSnakeOrLadder(finalPos)) {
-				System.out.println(board.getEntity(finalPos).getEncounterMessage());
-				finalPos = board.getEntity(finalPos).getEnd();
+			if(board.hasBoardEntity(finalPos)) {
+				BoardEntity boardEntity = board.getEntity(finalPos);
+				
+				if (boardEntity.getStart() == boardEntity.getEnd()) {
+					boardEntity.setEnd(boardEntity.getStart() + (move * 2));
+				}
+				System.out.println(boardEntity.getEncounterMessage());
+				finalPos = boardEntity.getEnd();
 			}
 			System.out.println("Taking you to "+finalPos);
 		} else {
