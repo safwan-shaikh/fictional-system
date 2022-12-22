@@ -46,11 +46,11 @@ public class Board {
 			}
 			else {
 				if (i==1)
-					System.out.print("HOME");
+					System.out.print("🏠️");
 				else if (i == 100)
-					System.out.print("START");
+					System.out.print("🏁️");
 				else
-				System.out.print(i+" ");
+					System.out.print(i+" ");
 			}
 			System.out.print("\t");
 			
